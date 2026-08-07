@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kontakt — Schewz Media</title>
+<meta name="description" content="Erzählen Sie uns von Ihrem Projekt: wir melden uns zeitnah mit einem individuellen Angebot.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fredoka:wght@600;700&display=swap" rel="stylesheet">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Schewz Media">
+<meta property="og:title" content="Kontakt — Schewz Media">
+<meta property="og:description" content="Erzählen Sie uns von Ihrem Projekt: wir melden uns zeitnah mit einem individuellen Angebot.">
+<meta property="og:url" content="https://schewzmedia.de/kontakt.html">
+<meta property="og:image" content="https://schewzmedia.de/assets/img/og-image.jpg">
+<meta property="og:locale" content="de_DE">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Kontakt — Schewz Media">
+<meta name="twitter:description" content="Erzählen Sie uns von Ihrem Projekt: wir melden uns zeitnah mit einem individuellen Angebot.">
+<meta name="twitter:image" content="https://schewzmedia.de/assets/img/og-image.jpg">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon-16x16.png">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header" id="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <img src="assets/img/logo.png" alt="Schewz Media" class="logo-mark">
+      <span class="logo-word"><span class="logo-schewz">schewz</span><span class="logo-media">media</span></span>
+    </a>
+    <nav class="nav-links">
+      <a href="index.html">Start</a>
+      <a href="videografie.html">Videografie</a>
+      <a href="marketing.html">Marketing</a>
+      <a href="portfolio.html">Portfolio</a>
+      <a href="ueber-uns.html">Über uns</a>
+      <a href="kontakt.html" class="active">Kontakt</a>
+    </nav>
+    <a href="kontakt.html" class="btn btn-primary btn-small">
+      Angebot anfragen
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+    </a>
+    <button class="nav-burger" id="navBurger" aria-label="Menü öffnen">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="sub-hero no-media">
+  <div class="sub-hero-text reveal">
+    <span class="kicker" style="margin-bottom:0">KONTAKT</span>
+    <h1>Erzählen Sie uns von Ihrem Projekt.</h1>
+    <p class="lead">Füllen Sie das Formular aus, wir melden uns zeitnah mit einem individuellen Angebot. Preise nennen wir immer projektbezogen.</p>
+    <div class="accent-rect"></div>
+  </div>
+</section>
+
+<!-- CONTACT BODY -->
+<section class="contact-body">
+  <div class="contact-grid">
+    <form class="contact-form reveal" id="contactForm">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="cf-name">Name</label>
+          <input type="text" id="cf-name" name="name" placeholder="Ihr vollständiger Name" required>
+        </div>
+        <div class="form-group">
+          <label for="cf-email">E-Mail</label>
+          <input type="email" id="cf-email" name="email" placeholder="name@unternehmen.de" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="cf-company">Unternehmen</label>
+          <input type="text" id="cf-company" name="company" placeholder="Firmenname">
+        </div>
+        <div class="form-group">
+          <label>Projektart</label>
+          <div class="chip-group">
+            <button type="button" class="chip active" data-choice="Video">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 8-6 4 6 4V8Z"/><rect x="2" y="6" width="14" height="12" rx="2"/></svg>
+              Video
+            </button>
+            <button type="button" class="chip" data-choice="Marketing">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg>
+              Marketing
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="cf-budget">Budget-Rahmen</label>
+        <select id="cf-budget" name="budget">
+          <option value="">Bitte auswählen</option>
+          <option>Bis 2.500 €</option>
+          <option>2.500 – 5.000 €</option>
+          <option>5.000 – 10.000 €</option>
+          <option>Über 10.000 €</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="cf-message">Nachricht</label>
+        <textarea id="cf-message" name="message" placeholder="Worum geht es? Beschreiben Sie kurz Ihr Vorhaben, Ziele und Zeitrahmen."></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">
+        Angebot anfragen
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </button>
+    </form>
+
+    <aside class="direct-contact reveal" style="transition-delay:.1s">
+      <h3>Lieber direkt?</h3>
+      <p>Schreiben Sie uns eine E-Mail oder folgen Sie uns. Wir antworten in der Regel innerhalb von 24 Stunden.</p>
+      <div class="direct-row">
+        <div class="direct-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg></div>
+        <div class="direct-meta"><span class="l">E-MAIL</span><span class="v">nikita@schewzmedia.de</span></div>
+      </div>
+      <div class="direct-row">
+        <div class="direct-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20z"/></svg></div>
+        <div class="direct-meta"><span class="l">WEB</span><span class="v">schewzmedia.de</span></div>
+      </div>
+      <div class="direct-row">
+        <div class="direct-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></div>
+        <div class="direct-meta"><span class="l">REGION</span><span class="v">DACH-Raum</span></div>
+      </div>
+      <div class="direct-divider"></div>
+      <span class="direct-follow-label">FOLGEN SIE UNS</span>
+      <div class="direct-socials">
+        <a href="#"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>Instagram</a>
+        <a href="#"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4V8h4v1.5A5 5 0 0 1 16 8Z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>LinkedIn</a>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-watermark" aria-hidden="true"></div>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="footer-logo">
+        <img src="assets/img/logo.png" alt="Schewz Media" class="logo-mark">
+        <span class="logo-word"><span class="logo-schewz" style="color:#fff">schewz</span><span class="logo-media">media</span></span>
+      </div>
+      <p class="footer-slogan">Sichtbarkeit, die bleibt.</p>
+      <p class="footer-desc">Videoproduktion &amp; Marketing für Marken im gesamten DACH-Raum.</p>
+      <div class="socials">
+        <a href="#" aria-label="Instagram"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
+        <a href="#" aria-label="LinkedIn"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4V8h4v1.5A5 5 0 0 1 16 8Z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <span class="footer-title">LEISTUNGEN</span>
+      <a href="videografie.html">Videografie</a>
+      <a href="marketing.html">Marketing</a>
+    </div>
+    <div class="footer-col">
+      <span class="footer-title">STUDIO</span>
+      <a href="ueber-uns.html">Über uns</a>
+      <a href="portfolio.html">Portfolio</a>
+      <a href="kontakt.html">Kontakt</a>
+    </div>
+    <div class="footer-col">
+      <span class="footer-title">RECHTLICHES</span>
+      <a href="impressum.html">Impressum</a>
+      <a href="datenschutz.html">Datenschutz</a>
+    </div>
+    <div class="footer-col">
+      <span class="footer-title">KONTAKT</span>
+      <a href="mailto:nikita@schewzmedia.de">nikita@schewzmedia.de</a>
+      <a href="#">schewzmedia.de</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Schewz Media · Videoproduktion &amp; Marketing</span>
+    <span>Tätig im gesamten DACH-Raum</span>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
