@@ -14,7 +14,8 @@
   --ease-spring:cubic-bezier(.34,1.56,.64,1);
   --font-head:'Inter',sans-serif;
   --font-body:'Inter',sans-serif;
-  --font-logo:'Fraunces',serif;
+  --font-serif:'Abhaya Libre',serif;
+  --font-logo:'Playfair Display',serif;
   --container:1440px;
 }
 
@@ -31,6 +32,7 @@ a{color:inherit;text-decoration:none;}
 img{display:block;max-width:100%;}
 ul{list-style:none;}
 h1,h2,h3,h4{font-family:var(--font-head);font-weight:800;letter-spacing:-1px;line-height:1.1;}
+p{font-family:var(--font-serif);}
 section{position:relative;}
 
 /* Scroll reveal */
@@ -82,7 +84,7 @@ section{position:relative;}
 }
 .logo{display:flex;align-items:center;gap:10px;}
 .logo-mark{width:28px;height:28px;object-fit:contain;}
-.logo-word{display:flex;align-items:center;gap:6px;font-family:var(--font-logo);font-size:22px;font-weight:700;letter-spacing:-.2px;}
+.logo-word{display:flex;align-items:center;gap:6px;font-family:var(--font-logo);font-size:23px;font-weight:800;letter-spacing:-.3px;}
 .logo-schewz{color:var(--ink);}
 .logo-media{color:var(--accent);}
 .nav-links{display:flex;align-items:center;gap:34px;}
