@@ -43,6 +43,44 @@ document.querySelectorAll('.typing-headline').forEach(typingEl => {
   typingIO.observe(typingEl);
 });
 
+// ===== Scroll-scrubbed SVG path drawing (homepage path-connector, marketing process-path) =====
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const drawPaths = Array.from(document.querySelectorAll('.path-trunk, .path-branch, .process-path-line'));
+if(drawPaths.length && !reduceMotion){
+  const tracked = drawPaths.map(path => {
+    const len = path.getTotalLength();
+    path.style.strokeDasharray = len;
+    path.style.strokeDashoffset = len;
+    const container = path.closest('.path-connector, .process-path');
+    const arrows = container ? Array.from(container.querySelectorAll('.path-arrow')) : [];
+    return {path, len, container, arrows};
+  });
+  let ticking = false;
+  function updateDraw(){
+    ticking = false;
+    const vh = window.innerHeight;
+    const start = vh * 0.9;
+    const end = vh * 0.25;
+    tracked.forEach(({path, len, container, arrows}) => {
+      const target = container || path;
+      const rect = target.getBoundingClientRect();
+      let progress = (start - rect.top) / (start - end);
+      progress = Math.max(0, Math.min(1, progress));
+      path.style.strokeDashoffset = len * (1 - progress);
+      arrows.forEach(a => a.classList.toggle('arrow-visible', progress > 0.9));
+    });
+  }
+  function onDrawScroll(){
+    if(!ticking){ requestAnimationFrame(updateDraw); ticking = true; }
+  }
+  window.addEventListener('scroll', onDrawScroll, {passive:true});
+  window.addEventListener('resize', onDrawScroll);
+  updateDraw();
+} else if(drawPaths.length){
+  drawPaths.forEach(path => { path.style.strokeDashoffset = 0; });
+  document.querySelectorAll('.path-arrow').forEach(a => a.classList.add('arrow-visible'));
+}
+
 // ===== Portfolio video: play on hover, pause + reset otherwise =====
 document.querySelectorAll('.portfolio-card').forEach(card => {
   const video = card.querySelector('video');
