@@ -19,6 +19,30 @@ const io = new IntersectionObserver((entries) => {
 }, {threshold:0.15, rootMargin:'0px 0px -60px 0px'});
 revealEls.forEach(el => io.observe(el));
 
+// ===== Typing animation for headlines (brand-band + portfolio case studies) =====
+document.querySelectorAll('.typing-headline').forEach(typingEl => {
+  const fullText = typingEl.textContent.trim();
+  typingEl.textContent = '';
+  const typingIO = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        typingIO.unobserve(entry.target);
+        let i = 0;
+        (function type(){
+          if(i <= fullText.length){
+            typingEl.textContent = fullText.slice(0, i);
+            i++;
+            setTimeout(type, 45);
+          } else {
+            typingEl.classList.add('typing-done');
+          }
+        })();
+      }
+    });
+  }, {threshold:0.5});
+  typingIO.observe(typingEl);
+});
+
 // ===== Portfolio video: play on hover, pause + reset otherwise =====
 document.querySelectorAll('.portfolio-card').forEach(card => {
   const video = card.querySelector('video');
