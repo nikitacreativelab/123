@@ -316,9 +316,9 @@ section{position:relative;}
   .nav-burger.active span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
   .nav-burger span{transition:transform .3s,opacity .3s;}
   .hero{padding:120px 24px 80px;}
-  .hero-inner{gap:48px;}
+  .hero-inner{gap:40px;}
   .hero-headline{font-size:44px;}
-  .hero-right{max-width:320px;}
+  .hero-right{width:100%;max-width:420px;}
   .services,.portfolio,.client-strip,.cta-band,.footer{padding-left:24px;padding-right:24px;}
   .services-grid{flex-direction:column;}
   .portfolio-grid{grid-template-columns:1fr;gap:36px;}
@@ -326,15 +326,15 @@ section{position:relative;}
   .cta-text h2{font-size:32px;}
   .brand-band{height:auto;padding:60px 24px;}
   .brand-band-inner{margin-left:0;}
-  .hero-buttons{flex-wrap:wrap;}
-  .hero-buttons .btn{font-size:15px;padding:15px 24px;}
+  .hero-buttons{flex-direction:column;align-items:stretch;gap:12px;}
+  .hero-buttons .btn{font-size:15px;padding:15px 24px;justify-content:center;width:100%;}
   .footer-brand{width:100%;}
   .footer-top{gap:36px;}
 }
 @media (max-width:480px){
   .hero{padding:110px 20px 60px;}
-  .hero-headline{font-size:36px;}
-  .hero-right{max-width:280px;border-radius:22px;}
+  .hero-headline{font-size:38px;}
+  .hero-right{width:100%;max-width:400px;border-radius:22px;}
   .hero-intro{font-size:16px;}
   .eyebrow{font-size:12px;}
   .btn{padding:14px 22px;font-size:14px;}
@@ -373,14 +373,15 @@ section{position:relative;}
   .sub-hero{padding:120px 24px 80px;}
   .sub-hero h1,.sub-hero:has(.sub-hero-media) h1{font-size:38px;letter-spacing:-1px;}
   .sub-hero:has(.sub-hero-media) p.lead{font-size:17px;}
-  .sub-hero-media{max-width:280px;}
+  .sub-hero-media{width:100%;max-width:420px;}
   .sub-hero.no-media{padding-bottom:200px;}
 }
 @media (max-width:480px){
   .sub-hero{padding:110px 20px 60px;}
-  .sub-hero h1,.sub-hero:has(.sub-hero-media) h1{font-size:30px;letter-spacing:-.7px;}
+  .sub-hero h1{font-size:28px;letter-spacing:-.6px;}
+  .sub-hero:has(.sub-hero-media) h1{font-size:32px;letter-spacing:-.8px;}
   .sub-hero:has(.sub-hero-media) p.lead{font-size:16px;}
-  .sub-hero-media{max-width:240px;border-radius:20px;}
+  .sub-hero-media{width:100%;max-width:400px;border-radius:20px;}
   .sub-hero.no-media{padding-bottom:140px;}
 }
 
