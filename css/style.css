@@ -329,7 +329,7 @@ section{position:relative;}
   .footer-top{gap:36px;}
   .underline-svg{bottom:-6px;height:16px;}
   .underline-svg path{stroke-width:3;}
-  .service-card .btn-ghost .mehr-ring{top:-10px;left:-16px;width:calc(100% + 32px);height:calc(100% + 20px);}
+  .service-card .btn-ghost .mehr-ring{top:-30px;left:-16px;width:calc(100% + 32px);height:calc(100% + 20px);}
   .mehr-ring path{stroke-width:3;}
 }
 @media (max-width:480px){
