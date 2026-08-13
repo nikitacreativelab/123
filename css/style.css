@@ -330,8 +330,8 @@ section{position:relative;}
   .footer-brand{width:100%;}
   .footer-top{gap:36px;}
   .underline-svg{bottom:-6px;height:16px;}
-  .underline-svg path{stroke-width:6;}
-  .mehr-ring path{stroke-width:6;}
+  .underline-svg path{stroke-width:5;}
+  .mehr-ring path{stroke-width:5;}
 }
 @media (max-width:480px){
   .hero{padding:110px 20px 60px;}
