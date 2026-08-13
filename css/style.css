@@ -192,7 +192,7 @@ section{position:relative;}
 .service-card .btn-ghost:hover{background:var(--accent);color:#fff;border-color:var(--accent);}
 .service-card .btn-ghost{animation:btn-hop 2.6s ease-in-out infinite;}
 .service-card .btn-ghost::before{
-  content:"";position:absolute;inset:-4px;border-radius:16px;
+  content:"";position:absolute;inset:-14px -20px;border-radius:50%;
   border:3px solid var(--accent);
   animation:orbit-ring 2.2s ease-in-out infinite;pointer-events:none;
 }
@@ -332,7 +332,7 @@ section{position:relative;}
   .footer-top{gap:36px;}
   .underline-svg{bottom:-6px;height:16px;}
   .underline-svg path{stroke-width:3;}
-  .service-card .btn-ghost::before{border-width:1.5px;}
+  .service-card .btn-ghost::before{border-width:1.5px;inset:-10px -16px;}
 }
 @media (max-width:480px){
   .hero{padding:110px 20px 60px;}
