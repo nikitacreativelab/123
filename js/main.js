@@ -99,6 +99,7 @@ document.querySelectorAll('.stack-carousel').forEach(root => {
   const prevBtn = root.querySelector('.stack-prev');
   const nextBtn = root.querySelector('.stack-next');
   const dragEl = root.querySelector('.stack-drag');
+  const stage = root.querySelector('.stack-stage');
 
   let progress = 0;
   let dragging = false;
@@ -178,6 +179,19 @@ document.querySelectorAll('.stack-carousel').forEach(root => {
     dragging = false;
     const cfg = getConfig();
     const dragDistance = e.clientX - startX;
+    if(Math.abs(dragDistance) < 6){
+      const rect = stage.getBoundingClientRect();
+      const clickX = e.clientX - (rect.left + rect.width/2);
+      let bestIndex = 0, bestDist = Infinity;
+      cards.forEach((card, i) => {
+        const diff = shortestDiff(i, progress);
+        const cardX = diff * cfg.x;
+        const d = Math.abs(cardX - clickX);
+        if(d < bestDist){ bestDist = d; bestIndex = i; }
+      });
+      goTo(bestIndex);
+      return;
+    }
     let shift = Math.round(-dragDistance / cfg.distanceDivisor);
     shift = Math.max(-(total-1), Math.min(total-1, shift));
     settleTo(Math.round(startProgress) + shift);
@@ -188,6 +202,25 @@ document.querySelectorAll('.stack-carousel').forEach(root => {
   if(prevBtn) prevBtn.addEventListener('click', () => goTo(Math.round(progress) - 1));
   if(nextBtn) nextBtn.addEventListener('click', () => goTo(Math.round(progress) + 1));
   dots.forEach((d,i) => d.addEventListener('click', () => goTo(i)));
+
+  let wheelAccum = 0;
+  let wheelTimer = null;
+  let wheelCooldown = false;
+  root.addEventListener('wheel', (e) => {
+    if(Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return;
+    e.preventDefault();
+    if(wheelCooldown) return;
+    wheelAccum += e.deltaX;
+    clearTimeout(wheelTimer);
+    wheelTimer = setTimeout(() => { wheelAccum = 0; }, 200);
+    if(Math.abs(wheelAccum) > 45){
+      const dir = wheelAccum > 0 ? 1 : -1;
+      wheelAccum = 0;
+      wheelCooldown = true;
+      goTo(Math.round(progress) + dir);
+      setTimeout(() => { wheelCooldown = false; }, 450);
+    }
+  }, {passive:false});
 
   window.addEventListener('resize', render);
   render();
