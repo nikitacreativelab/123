@@ -73,6 +73,7 @@ section{position:relative;}
   height:78px;
   background:rgba(11,12,15,.9);
   border-bottom:1px solid var(--border);
+  -webkit-backdrop-filter:blur(12px);
   backdrop-filter:blur(12px);
   transition:box-shadow .3s,background .3s;
 }
@@ -301,6 +302,8 @@ section{position:relative;}
 }
 @media (max-width:860px){
   .header-inner{padding:0 24px;}
+  .header{background:#0B0C0F;}
+  .header.scrolled{background:#0B0C0F;}
   .header .btn-primary{display:none;}
   .nav-burger{display:flex;z-index:110;}
   .nav-links{
