@@ -332,6 +332,7 @@ section{position:relative;}
   .footer-top{gap:36px;}
   .underline-svg{bottom:-6px;height:16px;}
   .underline-svg path{stroke-width:3;}
+  .service-card .btn-ghost::before{border-width:1px;}
 }
 @media (max-width:480px){
   .hero{padding:110px 20px 60px;}
