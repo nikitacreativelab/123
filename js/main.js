@@ -90,6 +90,109 @@ document.querySelectorAll('.portfolio-card').forEach(card => {
   card.addEventListener('touchstart', () => { video.play().catch(()=>{}); }, {passive:true});
 });
 
+// ===== Portfolio: draggable stacked video carousel =====
+document.querySelectorAll('.stack-carousel').forEach(root => {
+  const cards = Array.from(root.querySelectorAll('.stack-card'));
+  const total = cards.length;
+  if(!total) return;
+  const dots = Array.from(root.querySelectorAll('.stack-dot'));
+  const prevBtn = root.querySelector('.stack-prev');
+  const nextBtn = root.querySelector('.stack-next');
+  const dragEl = root.querySelector('.stack-drag');
+
+  let progress = 0;
+  let dragging = false;
+  let startX = 0;
+  let startProgress = 0;
+  let activeIndex = -1;
+
+  function getConfig(){
+    const w = window.innerWidth;
+    if(w <= 480) return {x:58, y:12, rot:6, scale:0.09, sensitivity:130, distanceDivisor:85};
+    if(w <= 860) return {x:78, y:16, rot:7, scale:0.09, sensitivity:160, distanceDivisor:105};
+    if(w <= 1100) return {x:110, y:22, rot:8, scale:0.09, sensitivity:200, distanceDivisor:135};
+    return {x:140, y:28, rot:9, scale:0.1, sensitivity:225, distanceDivisor:165};
+  }
+
+  function shortestDiff(index, p){
+    let diff = (index - p) % total;
+    if(diff > total/2) diff -= total;
+    if(diff < -total/2) diff += total;
+    return diff;
+  }
+
+  function render(){
+    const cfg = getConfig();
+    cards.forEach((card, i) => {
+      const diff = shortestDiff(i, progress);
+      const abs = Math.abs(diff);
+      const x = diff * cfg.x;
+      const y = abs < 0.05 ? 0 : abs * cfg.y;
+      const rot = abs < 0.05 ? 0 : diff * cfg.rot;
+      const scale = 1 - abs * cfg.scale;
+      const fadeStart = total/2 - 0.4;
+      const opacity = abs > fadeStart ? Math.max(0, 1 - (abs - fadeStart)/0.5) : 1;
+      card.style.transform = `translate(-50%,-50%) translate(${x}px, ${y}px) rotate(${rot}deg) scale(${scale})`;
+      card.style.opacity = opacity;
+      card.style.zIndex = String(Math.round(100 - abs*10));
+    });
+    const active = ((Math.round(progress) % total) + total) % total;
+    dots.forEach((d,i) => d.classList.toggle('active', i === active));
+    if(active !== activeIndex){
+      cards.forEach((card,i) => {
+        const v = card.querySelector('video');
+        if(!v) return;
+        if(i === active){ v.play().catch(()=>{}); }
+        else{ v.pause(); }
+      });
+      activeIndex = active;
+    }
+  }
+
+  function settleTo(target){
+    cards.forEach(c => c.classList.remove('dragging'));
+    progress = target;
+    render();
+  }
+
+  function goTo(index){
+    settleTo(progress + shortestDiff(index, progress));
+  }
+
+  dragEl.addEventListener('pointerdown', (e) => {
+    dragging = true;
+    startX = e.clientX;
+    startProgress = progress;
+    cards.forEach(c => c.classList.add('dragging'));
+    dragEl.setPointerCapture(e.pointerId);
+  });
+  dragEl.addEventListener('pointermove', (e) => {
+    if(!dragging) return;
+    const cfg = getConfig();
+    const delta = (e.clientX - startX) / cfg.sensitivity;
+    progress = startProgress - delta;
+    render();
+  });
+  function endDrag(e){
+    if(!dragging) return;
+    dragging = false;
+    const cfg = getConfig();
+    const dragDistance = e.clientX - startX;
+    let shift = Math.round(-dragDistance / cfg.distanceDivisor);
+    shift = Math.max(-(total-1), Math.min(total-1, shift));
+    settleTo(Math.round(startProgress) + shift);
+  }
+  dragEl.addEventListener('pointerup', endDrag);
+  dragEl.addEventListener('pointercancel', endDrag);
+
+  if(prevBtn) prevBtn.addEventListener('click', () => goTo(Math.round(progress) - 1));
+  if(nextBtn) nextBtn.addEventListener('click', () => goTo(Math.round(progress) + 1));
+  dots.forEach((d,i) => d.addEventListener('click', () => goTo(i)));
+
+  window.addEventListener('resize', render);
+  render();
+});
+
 // ===== Mobile nav toggle =====
 const burger = document.getElementById('navBurger');
 const navLinks = document.querySelector('.nav-links');
