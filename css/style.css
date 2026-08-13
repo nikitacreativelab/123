@@ -193,10 +193,10 @@ section{position:relative;}
 .service-card .btn-ghost{animation:btn-hop 2.6s ease-in-out infinite;}
 .service-card .btn-ghost::before{
   content:"";position:absolute;inset:-4px;border-radius:16px;
-  border:2px solid var(--accent);
+  border:3px solid var(--accent);
   animation:orbit-ring 2.2s ease-in-out infinite;pointer-events:none;
 }
-@keyframes orbit-ring{0%,100%{opacity:.35;transform:scale(1);}50%{opacity:.9;transform:scale(1.045);}}
+@keyframes orbit-ring{0%,100%{opacity:.6;transform:scale(1);}50%{opacity:1;transform:scale(1.045);}}
 @keyframes btn-hop{0%,35%,100%{transform:translateY(0);}17%{transform:translateY(-6px);}}
 @media (prefers-reduced-motion:reduce){.service-card .btn-ghost::before,.service-card .btn-ghost{animation:none;opacity:1;}}
 
@@ -332,7 +332,7 @@ section{position:relative;}
   .footer-top{gap:36px;}
   .underline-svg{bottom:-6px;height:16px;}
   .underline-svg path{stroke-width:3;}
-  .service-card .btn-ghost::before{border-width:1px;}
+  .service-card .btn-ghost::before{border-width:1.5px;}
 }
 @media (max-width:480px){
   .hero{padding:110px 20px 60px;}
