@@ -230,12 +230,32 @@ document.querySelectorAll('.stack-carousel').forEach(root => {
 const burger = document.getElementById('navBurger');
 const navLinks = document.querySelector('.nav-links');
 if(burger){
+  let savedScrollY = 0;
+  function openNav(){
+    savedScrollY = window.scrollY;
+    navLinks.classList.add('open');
+    burger.classList.add('active');
+    document.body.style.position = 'fixed';
+    document.body.style.top = `-${savedScrollY}px`;
+    document.body.style.left = '0';
+    document.body.style.right = '0';
+    document.body.style.width = '100%';
+  }
+  function closeNav(){
+    navLinks.classList.remove('open');
+    burger.classList.remove('active');
+    document.body.style.position = '';
+    document.body.style.top = '';
+    document.body.style.left = '';
+    document.body.style.right = '';
+    document.body.style.width = '';
+    window.scrollTo(0, savedScrollY);
+  }
   burger.addEventListener('click', () => {
-    navLinks.classList.toggle('open');
-    burger.classList.toggle('active');
+    if(navLinks.classList.contains('open')) closeNav(); else openNav();
   });
   document.querySelectorAll('.nav-links a').forEach(a => {
-    a.addEventListener('click', () => navLinks.classList.remove('open'));
+    a.addEventListener('click', closeNav);
   });
 }
 
