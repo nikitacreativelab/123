@@ -329,7 +329,6 @@ section{position:relative;}
   .footer-top{gap:36px;}
   .underline-svg{bottom:-6px;height:16px;}
   .underline-svg path{stroke-width:3;}
-  .service-card .btn-ghost .mehr-ring{top:-4.3px;left:-6.2px;width:calc(100% + 13px);height:calc(100% + 9px);}
   .mehr-ring path{stroke-width:3;}
 }
 @media (max-width:480px){
