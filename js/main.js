@@ -81,6 +81,59 @@ if(drawPaths.length && !reduceMotion){
   document.querySelectorAll('.path-arrow').forEach(a => a.classList.add('arrow-visible'));
 }
 
+// ===== Portfolio: scroll progress bar + wandering globe + section dot nav =====
+const scrollGlobe = document.querySelector('.scroll-globe');
+const caseStudies = Array.from(document.querySelectorAll('.case-study'));
+if(scrollGlobe && caseStudies.length){
+  const progressBar = document.querySelector('.scroll-progress-bar');
+  const dots = Array.from(document.querySelectorAll('.section-dot'));
+  const globePositions = [
+    {top:18, left:82, scale:1.05},
+    {top:52, left:10, scale:0.85},
+    {top:28, left:80, scale:1.25},
+    {top:60, left:14, scale:1},
+  ];
+  let activeSection = -1;
+  function updateScrollExperience(){
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? Math.min(Math.max(scrollTop / docHeight, 0), 1) : 0;
+    if(progressBar) progressBar.style.width = (progress * 100) + '%';
+
+    const viewportCenter = window.innerHeight / 2;
+    let active = 0;
+    let minDist = Infinity;
+    caseStudies.forEach((sec, i) => {
+      const r = sec.getBoundingClientRect();
+      const center = r.top + r.height / 2;
+      const dist = Math.abs(center - viewportCenter);
+      if(dist < minDist){ minDist = dist; active = i; }
+    });
+    if(active !== activeSection){
+      const pos = globePositions[active % globePositions.length];
+      scrollGlobe.style.transform = `translate3d(${pos.left}vw,${pos.top}vh,0) translate3d(-50%,-50%,0) scale(${pos.scale})`;
+      dots.forEach((d, i) => d.classList.toggle('active', i === active));
+      activeSection = active;
+    }
+  }
+  let scrollTicking = false;
+  window.addEventListener('scroll', () => {
+    if(!scrollTicking){
+      requestAnimationFrame(() => { updateScrollExperience(); scrollTicking = false; });
+      scrollTicking = true;
+    }
+  }, {passive:true});
+  window.addEventListener('resize', updateScrollExperience);
+  updateScrollExperience();
+
+  dots.forEach(dot => {
+    dot.addEventListener('click', () => {
+      const target = document.getElementById(dot.dataset.target);
+      if(target) target.scrollIntoView({behavior:'smooth', block:'center'});
+    });
+  });
+}
+
 // ===== Process tracking steps (mobile order-tracking style) =====
 const ptSteps = document.querySelectorAll('.process-tracking .process-step');
 if(ptSteps.length){
