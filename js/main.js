@@ -81,9 +81,10 @@ if(drawPaths.length && !reduceMotion){
   document.querySelectorAll('.path-arrow').forEach(a => a.classList.add('arrow-visible'));
 }
 
-// ===== Portfolio: scroll progress bar + wandering globe + section dot nav =====
+// ===== Portfolio: scroll progress bar + globe stage intro + wandering globe + section dot nav =====
 const scrollGlobe = document.querySelector('.scroll-globe');
 const caseStudies = Array.from(document.querySelectorAll('.case-study'));
+const globeStage = document.querySelector('.globe-stage');
 if(scrollGlobe && caseStudies.length){
   const progressBar = document.querySelector('.scroll-progress-bar');
   const dots = Array.from(document.querySelectorAll('.section-dot'));
@@ -93,27 +94,72 @@ if(scrollGlobe && caseStudies.length){
     {top:28, left:80, scale:1.25},
     {top:60, left:14, scale:1},
   ];
+  const isMobile = window.innerWidth <= 860;
+  // Vor der Stage: Erde dezent oben rechts (passend zur Hero-Position).
+  const heroPos = {top:16, left:84, scale:0.55, opacity:isMobile ? .14 : .18};
+  // Mitte der Stage: Erde wird groß und steht allein im Bild.
+  const bigPos  = {top:48, left:50, scale:isMobile ? 1.5 : 2.3, opacity:.55};
+  // Ende der Stage: Erde zieht seitlich aus dem Bild.
+  const exitPos = {top:48, left:-40, scale:isMobile ? 1.1 : 1.5, opacity:0};
+
+  const lerp = (a, b, t) => a + (b - a) * t;
+  const ease = t => t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+  const lerpPos = (a, b, t) => ({
+    top: lerp(a.top, b.top, t),
+    left: lerp(a.left, b.left, t),
+    scale: lerp(a.scale, b.scale, t),
+    opacity: lerp(a.opacity, b.opacity, t),
+  });
+
+  function applyGlobe(pos, scrub){
+    scrollGlobe.classList.toggle('scrub', !!scrub);
+    scrollGlobe.style.opacity = pos.opacity;
+    scrollGlobe.style.transform = `translate3d(${pos.left}vw,${pos.top}vh,0) translate3d(-50%,-50%,0) scale(${pos.scale})`;
+  }
+
   let activeSection = -1;
+  let mode = null; // 'hero' | 'stage' | 'wander'
+
   function updateScrollExperience(){
     const scrollTop = window.scrollY;
     const docHeight = document.documentElement.scrollHeight - window.innerHeight;
     const progress = docHeight > 0 ? Math.min(Math.max(scrollTop / docHeight, 0), 1) : 0;
     if(progressBar) progressBar.style.width = (progress * 100) + '%';
 
-    const viewportCenter = window.innerHeight / 2;
-    let active = 0;
-    let minDist = Infinity;
-    caseStudies.forEach((sec, i) => {
-      const r = sec.getBoundingClientRect();
-      const center = r.top + r.height / 2;
-      const dist = Math.abs(center - viewportCenter);
-      if(dist < minDist){ minDist = dist; active = i; }
-    });
-    if(active !== activeSection){
-      const pos = globePositions[active % globePositions.length];
-      scrollGlobe.style.transform = `translate3d(${pos.left}vw,${pos.top}vh,0) translate3d(-50%,-50%,0) scale(${pos.scale})`;
-      dots.forEach((d, i) => d.classList.toggle('active', i === active));
-      activeSection = active;
+    const vh = window.innerHeight;
+    const rect = globeStage ? globeStage.getBoundingClientRect() : null;
+
+    if(rect && rect.top >= vh){
+      // Noch vor der Stage: dezente Hero-Position.
+      if(mode !== 'hero'){ applyGlobe(heroPos, false); mode = 'hero'; }
+      if(activeSection !== -1){ dots.forEach(d => d.classList.remove('active')); activeSection = -1; }
+    } else if(rect && rect.bottom > 0){
+      // Innerhalb der Stage: an den Scroll gekoppelt groß werden, dann seitlich rausziehen.
+      const range = rect.height + vh;
+      const scrolled = vh - rect.top;
+      const t = Math.min(Math.max(scrolled / range, 0), 1);
+      const pos = t <= 0.5 ? lerpPos(heroPos, bigPos, ease(t / 0.5)) : lerpPos(bigPos, exitPos, ease((t - 0.5) / 0.5));
+      applyGlobe(pos, true);
+      mode = 'stage';
+      if(activeSection !== -1){ dots.forEach(d => d.classList.remove('active')); activeSection = -1; }
+    } else {
+      // Nach der Stage: normales Wandern zwischen den Kunden-Sektionen.
+      const viewportCenter = vh / 2;
+      let active = 0;
+      let minDist = Infinity;
+      caseStudies.forEach((sec, i) => {
+        const r = sec.getBoundingClientRect();
+        const center = r.top + r.height / 2;
+        const dist = Math.abs(center - viewportCenter);
+        if(dist < minDist){ minDist = dist; active = i; }
+      });
+      if(active !== activeSection || mode !== 'wander'){
+        const pos = globePositions[active % globePositions.length];
+        applyGlobe({...pos, opacity: isMobile ? .14 : .18}, false);
+        dots.forEach((d, i) => d.classList.toggle('active', i === active));
+        activeSection = active;
+        mode = 'wander';
+      }
     }
   }
   let scrollTicking = false;
