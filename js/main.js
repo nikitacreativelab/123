@@ -81,6 +81,20 @@ if(drawPaths.length && !reduceMotion){
   document.querySelectorAll('.path-arrow').forEach(a => a.classList.add('arrow-visible'));
 }
 
+// ===== Process tracking steps (mobile order-tracking style) =====
+const ptSteps = document.querySelectorAll('.process-tracking .process-step');
+if(ptSteps.length){
+  const ptIO = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('pt-done');
+        ptIO.unobserve(entry.target);
+      }
+    });
+  }, {threshold:0, rootMargin:'0px 0px -35% 0px'});
+  ptSteps.forEach(step => ptIO.observe(step));
+}
+
 // ===== Portfolio video: play on hover, pause + reset otherwise =====
 document.querySelectorAll('.portfolio-card').forEach(card => {
   const video = card.querySelector('video');
