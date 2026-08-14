@@ -99,8 +99,8 @@ if(scrollGlobe && caseStudies.length){
   const heroPos = {top:16, left:84, scale:0.55, opacity:isMobile ? .14 : .18};
   // Mitte der Stage: Erde wird groß und steht allein im Bild.
   const bigPos  = {top:48, left:50, scale:isMobile ? 1.5 : 2.3, opacity:.55};
-  // Ende der Stage: Erde zieht seitlich aus dem Bild.
-  const exitPos = {top:48, left:-40, scale:isMobile ? 1.1 : 1.5, opacity:0};
+  // Ende der Stage: Erde bleibt zentral stehen und verschwindet (kein seitliches Rausziehen).
+  const exitPos = {top:48, left:50, scale:isMobile ? 1.5 : 2.3, opacity:0};
 
   const lerp = (a, b, t) => a + (b - a) * t;
   const ease = t => t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
