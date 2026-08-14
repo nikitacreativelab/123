@@ -595,14 +595,9 @@ section{position:relative;}
 @media (max-width:480px){.stack-carousel{height:330px;} .stack-card{width:145px;}}
 
 /* ================================================================
-   PORTFOLIO HERO (globe accent)
+   PORTFOLIO HERO
    ================================================================ */
-.globe-accent{position:absolute;top:50px;right:-140px;width:700px;opacity:.16;pointer-events:none;z-index:0;animation:globe-spin 40s linear infinite;}
 @keyframes globe-spin{to{transform:rotate(360deg);}}
-@media (prefers-reduced-motion:reduce){.globe-accent{animation:none;}}
-@media (max-width:1100px){.globe-accent{width:460px;top:32px;right:-92px;}}
-@media (max-width:860px){.globe-accent{width:320px;top:16px;right:-70px;}}
-@media (max-width:480px){.globe-accent{width:240px;top:10px;right:-55px;}}
 
 /* ================================================================
    PORTFOLIO SCROLL EXPERIENCE (progress bar, wandering globe, dot nav)
