@@ -524,7 +524,7 @@ section{position:relative;}
 }
 .team-card:hover{transform:translateY(-6px);border-color:#5b5f68;}
 .team-photo{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;background:var(--surface-2);}
-.team-photo[src*="christina-schewz"]{object-position:38% 68%;}
+.team-photo[src*="christina-schewz"]{object-position:50% 45.5%;}
 .team-photo.placeholder{display:flex;align-items:center;justify-content:center;color:var(--ink-soft);}
 .team-info{padding:22px 24px 26px;}
 .team-info h4{font-size:19px;letter-spacing:-.3px;color:var(--ink);}

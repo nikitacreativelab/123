@@ -127,7 +127,7 @@ if(caseStudies.length && (progressBar || dots.length)){
 }
 
 // ===== Stats: Zahlen von 0 hochzaehlen, sobald sie sichtbar werden =====
-const countEls = document.querySelectorAll('.stat-num[data-count-to]');
+const countEls = document.querySelectorAll('[data-count-to]');
 if(countEls.length){
   const countIO = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
