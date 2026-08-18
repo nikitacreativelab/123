@@ -355,6 +355,10 @@ section{position:relative;}
   .cta-text h2{font-size:26px;}
 }
 
+/* Zaehler-Zahl in Headlines: feste Breite, damit umgebender Text (z.B. bei
+   text-align:right) waehrend der Hochzaehl-Animation nicht mitwandert */
+.headline-count{display:inline-block;min-width:1.9em;text-align:left;}
+
 /* ================================================================
    SUB-PAGE HERO (Videografie / Marketing / Über uns)
    ================================================================ */
