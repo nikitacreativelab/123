@@ -6,11 +6,15 @@ const canvas = document.getElementById('globePulseCanvas');
 
 if (canvas) {
   const markers = [
-    { location: [52.3676, 4.9041], baseSize: 0.05, delay: 0 },    // Amsterdam
-    { location: [50.9375, 6.9603], baseSize: 0.06, delay: 0.4 },  // Koeln
-    { location: [50.8503, 4.3517], baseSize: 0.05, delay: 0.8 },  // Bruessel
-    { location: [46.9480, 7.4474], baseSize: 0.05, delay: 1.2 },  // Schweiz
-    { location: [48.8566, 2.3522], baseSize: 0.05, delay: 1.6 },  // Frankreich
+    { location: [52.3676, 4.9041], baseSize: 0.05, delay: 0 },     // Amsterdam
+    { location: [50.9375, 6.9603], baseSize: 0.06, delay: 0.4 },   // Koeln
+    { location: [50.8503, 4.3517], baseSize: 0.05, delay: 0.8 },   // Bruessel
+    { location: [46.9480, 7.4474], baseSize: 0.05, delay: 1.2 },   // Schweiz
+    { location: [48.8566, 2.3522], baseSize: 0.05, delay: 1.6 },   // Frankreich
+    { location: [51.5074, -0.1278], baseSize: 0.05, delay: 2.0 },  // London
+    { location: [40.7128, -74.006], baseSize: 0.05, delay: 2.4 },  // New York
+    { location: [35.6762, 139.6503], baseSize: 0.05, delay: 2.8 }, // Tokio
+    { location: [-33.8688, 151.2093], baseSize: 0.05, delay: 3.2 },// Sydney
   ];
 
   let phi = 0;

@@ -126,6 +126,30 @@ if(caseStudies.length && (progressBar || dots.length)){
   });
 }
 
+// ===== Stats: Zahlen von 0 hochzaehlen, sobald sie sichtbar werden =====
+const countEls = document.querySelectorAll('.stat-num[data-count-to]');
+if(countEls.length){
+  const countIO = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(!entry.isIntersecting) return;
+      const el = entry.target;
+      countIO.unobserve(el);
+      const target = parseFloat(el.dataset.countTo);
+      const suffix = el.dataset.suffix || '';
+      const duration = 1400;
+      const start = performance.now();
+      function tick(now){
+        const t = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - t, 3);
+        el.textContent = Math.round(target * eased) + suffix;
+        if(t < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    });
+  }, {threshold:0.4});
+  countEls.forEach(el => countIO.observe(el));
+}
+
 // ===== Process tracking steps (mobile order-tracking style) =====
 const ptSteps = document.querySelectorAll('.process-tracking .process-step');
 if(ptSteps.length){
