@@ -631,7 +631,7 @@ section{position:relative;}
   /* cobe erzeugt zur Laufzeit einen eigenen position:relative-Wrapper um das
      Canvas; den auf static zuruecksetzen, damit .portfolio-hero (nicht der
      cobe-Wrapper) das Containing Block fuer die absolute Positionierung ist. */
-  .portfolio-hero > div:not([class]){position:static;}
+  .portfolio-hero > div:not([class]){position:static !important;}
   .portfolio-hero .globe-pulse-canvas{
     left:auto;right:-40px;transform:translateY(-50%);
   }
